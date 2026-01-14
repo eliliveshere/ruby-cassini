@@ -74,7 +74,7 @@ export type ServiceCategory =
   | 'Conversion & Funnels'
   | 'Launch Support'
   | 'Paid Ads';
-export type WorkCardStatus = 'draft' | 'submitted' | 'in_progress' | 'review' | 'delivered' | 'completed' | 'staged';
+export type WorkCardStatus = 'draft' | 'submitted' | 'in_progress' | 'review' | 'delivered' | 'completed' | 'staged' | 'in_production';
 
 export type TeamMember = {
   name: string;
