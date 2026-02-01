@@ -257,7 +257,7 @@ export default function TicketsPage() {
                         </div>
 
                         {/* Input */}
-                        <form onSubmit={handleSendReply} className="p-4 border-t border-zinc-800 bg-zinc-900/30">
+                        <form onSubmit={handleSendReply} className="p-4 pb-28 md:pb-4 border-t border-zinc-800 bg-zinc-900/30">
                             <div className="relative">
                                 <input
                                     value={replyText}
