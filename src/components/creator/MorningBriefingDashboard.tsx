@@ -69,17 +69,20 @@ export default function MorningBriefingDashboard() {
 
     return (
         <div className="max-w-[1600px] mx-auto p-4 pb-32 lg:p-12 animate-in fade-in duration-700 space-y-8">
-            <header className="mb-6 flex items-start justify-between">
+            <header className="mb-6 flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">Morning Briefing</h1>
                     <p className="text-zinc-500 dark:text-zinc-400">Daily insights and trends tailored for your channel.</p>
                 </div>
-                <button
-                    onClick={toggleTheme}
-                    className="hidden md:block p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                >
-                    {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </button>
+                {/* Theme toggle is hidden on mobile, but if we add more controls they should stack */}
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={toggleTheme}
+                        className="hidden md:block p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                    >
+                        {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                    </button>
+                </div>
             </header>
 
             {/* Quick Stats Row */}

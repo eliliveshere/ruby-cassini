@@ -135,11 +135,11 @@ export default function TicketsPage() {
             {/* Sidebar List */}
             <div className={`w-full md:w-96 border-r border-zinc-800 flex flex-col bg-zinc-900/30 ${selectedTicketId ? 'hidden md:flex' : 'flex'}`}>
                 <div className="p-4 border-b border-zinc-800">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
                         <h2 className="text-lg font-semibold text-white">Tickets</h2>
                         <button
                             onClick={() => setIsNewTicketOpen(true)}
-                            className="p-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-500 transition-colors"
+                            className="p-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-500 transition-colors w-full md:w-auto flex justify-center"
                             title="New Ticket"
                         >
                             <Plus className="h-4 w-4" />
