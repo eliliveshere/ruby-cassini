@@ -2,8 +2,22 @@
 
 import Link from 'next/link';
 import { ArrowRight, Sparkles, CheckCircle2, PlayCircle } from 'lucide-react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LandingPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to dashboard if in PWA/Standalone mode
+    if (typeof window !== 'undefined') {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone === true;
+      if (isStandalone) {
+        router.replace('/dashboard');
+      }
+    }
+  }, [router]);
+
   return (
     <div className="relative min-h-screen flex flex-col font-sans selection:bg-indigo-500/30 overflow-hidden">
       {/* Background Image with Overlay */}

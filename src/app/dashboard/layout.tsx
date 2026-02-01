@@ -1,7 +1,7 @@
 'use client';
 
 import { useStore } from '@/store/useStore';
-import { LayoutDashboard, LogOut, Plus, Settings, Sparkles, Wallet, MessageSquare, CreditCard, Sun, Moon, Compass, User } from 'lucide-react';
+import { LayoutDashboard, LogOut, Plus, Settings, Sparkles, Wallet, MessageSquare, CreditCard, Sun, Moon, Compass, User, Folder } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -67,12 +67,20 @@ export default function DashboardLayout({
                            For simplicity in this diff, reusing the exact same structure but inside the hidden md:flex aside.
                         */
                         <>
+                            <div className="mb-2">
+                                <Link href="/dashboard/new-project" className="flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-3 rounded-lg text-sm transition-all shadow-sm hover:shadow-indigo-500/20 active:scale-[0.98]">
+                                    <Plus className="h-4 w-4" />
+                                    <span>New Project</span>
+                                </Link>
+                            </div>
+
                             <nav className="space-y-1.5">
                                 <div className="flex items-center gap-1.5 px-3 mb-2 text-zinc-500">
                                     <LayoutDashboard className="h-3 w-3" />
                                     <span className="text-[10px] font-bold uppercase tracking-widest">Platform</span>
                                 </div>
-                                <DesktopNavLink href="/dashboard" icon={LayoutDashboard} label="Agency Home" active={pathname === '/dashboard' || pathname?.startsWith('/dashboard/work')} />
+                                <DesktopNavLink href="/dashboard" icon={LayoutDashboard} label="Agency Home" active={pathname === '/dashboard'} />
+                                <DesktopNavLink href="/dashboard/projects" icon={Folder} label="Projects" active={pathname?.startsWith('/dashboard/projects') || pathname?.startsWith('/dashboard/project/')} />
 
                                 {(useStore.getState().demoArchetype === 'youtube') && (
                                     <DesktopNavLink href="/dashboard/pipeline" icon={PipelineIcon} label="Pipeline" active={pathname === '/dashboard/pipeline'} />
@@ -97,18 +105,7 @@ export default function DashboardLayout({
 
                             {/* Workspace & Status Cards */}
                             <div className="space-y-4 pt-4 border-t border-zinc-200 dark:border-zinc-900">
-                                <div className="rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800/80 p-5 backdrop-blur-sm">
-                                    <div className="flex items-center justify-between mb-3">
-                                        <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Available Balance</span>
-                                        <Wallet className="h-3.5 w-3.5 text-zinc-600" />
-                                    </div>
-                                    <div className="text-2xl font-bold text-zinc-900 dark:text-white tracking-tight">
-                                        {workspace?.credits || 0}
-                                    </div>
-                                    <button className="mt-4 w-full rounded-md bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 py-2 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-colors border border-zinc-300 dark:border-zinc-700/50">
-                                        Buy Credits
-                                    </button>
-                                </div>
+
 
                                 <div>
                                     <button
@@ -160,6 +157,7 @@ export default function DashboardLayout({
             {/* Mobile Bottom Nav */}
             <nav className="md:hidden fixed bottom-6 left-6 right-6 h-16 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-lg border border-zinc-200 dark:border-zinc-800 rounded-2xl flex items-center justify-around px-2 z-50 shadow-2xl shadow-zinc-900/20">
                 <MobileNavLink href="/dashboard" icon={LayoutDashboard} active={pathname === '/dashboard'} />
+                <MobileNavLink href="/dashboard/projects" icon={Folder} active={pathname?.startsWith('/dashboard/projects')} />
 
                 {(useStore.getState().demoArchetype === 'youtube') && (
                     <MobileNavLink href="/dashboard/pipeline" icon={PipelineIcon} active={pathname === '/dashboard/pipeline'} />

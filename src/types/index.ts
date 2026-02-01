@@ -69,7 +69,7 @@ export type Campaign = {
 import { ServiceCategory as CategoryType } from '@/constants/categories';
 
 export type ServiceCategory = CategoryType;
-export type WorkCardStatus = 'draft' | 'submitted' | 'in_progress' | 'review' | 'delivered' | 'completed' | 'staged' | 'in_production';
+export type WorkCardStatus = 'draft' | 'submitted' | 'in_progress' | 'review' | 'delivered' | 'completed' | 'staged' | 'in_production' | 'scripting' | 'filming' | 'editing' | 'distribution';
 
 export type TeamMember = {
   name: string;

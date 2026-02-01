@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { Campaign, CreditAction, CreditLedger, Project, User, WorkCard, Workspace, Ticket, TicketMessage, TicketStatus, InteractionPreference, ServiceCategory, CreatorProfile } from '@/types';
+import { getDemoDataForNiche } from '@/lib/demo-data-sets';
+import { DEMO_CAMPAIGNS, DEMO_PROJECTS, DEMO_USER, DEMO_WORK_CARDS, DEMO_WORKSPACE, DEMO_TICKETS } from '@/lib/demo-data';
 
 interface AppState {
     user: User | null;
@@ -28,6 +30,7 @@ interface AppState {
     toggleWorkspaceStatus: () => void;
     demoArchetype: 'shopify' | 'youtube' | 'kickstarter' | 'leads';
     setDemoArchetype: (archetype: 'shopify' | 'youtube' | 'kickstarter' | 'leads') => void;
+    loadDemoData: (niche: string) => void;
 
     // Legacy / Other
     addCampaign: (campaign: any) => void;
@@ -35,10 +38,6 @@ interface AppState {
     deductCredits: (action: CreditAction, cost: number) => boolean;
     addCredits: (amount: number) => void;
 }
-
-import { DEMO_CAMPAIGNS, DEMO_PROJECTS, DEMO_USER, DEMO_WORK_CARDS, DEMO_WORKSPACE, DEMO_TICKETS } from '@/lib/demo-data';
-
-// ...
 
 export const useStore = create<AppState>((set, get) => ({
     user: DEMO_USER,
@@ -80,6 +79,41 @@ export const useStore = create<AppState>((set, get) => ({
             user: newUser,
             workspace: newWorkspace,
             creditLedger: []
+        });
+    },
+
+    loadDemoData: (niche: string) => {
+        const data = getDemoDataForNiche(niche);
+
+        // Merge partial profile with defaults to satisfy type
+        const defaultProfile: CreatorProfile = {
+            channelName: "New Channel",
+            primaryPlatform: "youtube",
+            niche: niche,
+            audienceLevel: "intermediate",
+            targetAudienceOneLiner: "People interested in specific topics",
+            contentTypes: ["Video"],
+            formats: ["Talking Head"],
+            typicalLength: "8-20m",
+            tone: "educational",
+            pacing: "medium",
+            ctaStyle: "subtle",
+            swearing: "never",
+            cadenceGoal: "1wk",
+            primaryGoal: "growth",
+            biggestConstraint: "time",
+            integrations: { youtube: true, instagram: false, googleDrive: false, metaAds: false },
+            workflow: { pipelineTemplate: 'simple', requireApproval: false },
+            ...data.profile, // Overwrite with demo specifics
+        } as CreatorProfile;
+
+        set({
+            creatorProfile: defaultProfile,
+            projects: data.projects,
+            workCards: data.workCards,
+            tickets: data.tickets,
+            // Also update workspace name for immersion
+            workspace: get().workspace ? { ...get().workspace!, name: `${defaultProfile.channelName} Workspace` } : get().workspace
         });
     },
 

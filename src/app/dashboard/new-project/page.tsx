@@ -124,150 +124,130 @@ export default function NewProjectPage() {
                             <p className="text-zinc-400 text-sm">Full production support: Script, Edit, Thumbnail, and Optimization.</p>
                         </button>
 
-                        {/* Stubs for others */}
-                        <div className="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl text-left opacity-50 cursor-not-allowed">
-                            <div className="h-14 w-14 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500 mb-6">
+                        <button
+                            onClick={() => handleTypeSelect('Paid Ads')}
+                            className="bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-900/80 p-8 rounded-2xl text-left transition-all group shadow-lg"
+                        >
+                            <div className="h-14 w-14 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform">
                                 <Target className="h-7 w-7" />
                             </div>
                             <h3 className="text-xl font-bold mb-2">Paid Ad Campaign</h3>
-                            <p className="text-zinc-500 text-sm">Coming Soon</p>
-                        </div>
-                        <div className="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl text-left opacity-50 cursor-not-allowed">
-                            <div className="h-14 w-14 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6">
+                            <p className="text-zinc-400 text-sm">Full funnel ad support: Creative, Copy, Targeting, and Pixel setup.</p>
+                        </button>
+
+                        <button
+                            onClick={() => handleTypeSelect('Social Media')}
+                            className="bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-900/80 p-8 rounded-2xl text-left transition-all group shadow-lg"
+                        >
+                            <div className="h-14 w-14 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6 group-hover:scale-110 transition-transform">
                                 <Share2 className="h-7 w-7" />
                             </div>
                             <h3 className="text-xl font-bold mb-2">Social Media</h3>
-                            <p className="text-zinc-500 text-sm">Coming Soon</p>
-                        </div>
-                        <div className="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl text-left opacity-50 cursor-not-allowed">
-                            <div className="h-14 w-14 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 mb-6">
+                            <p className="text-zinc-400 text-sm">Batch content creation: Carousels, Short-form, and Hashtags.</p>
+                        </button>
+
+                        <button
+                            onClick={() => handleTypeSelect('Strategy')}
+                            className="bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-900/80 p-8 rounded-2xl text-left transition-all group shadow-lg"
+                        >
+                            <div className="h-14 w-14 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 mb-6 group-hover:scale-110 transition-transform">
                                 <PenTool className="h-7 w-7" />
                             </div>
                             <h3 className="text-xl font-bold mb-2">Strategy</h3>
-                            <p className="text-zinc-500 text-sm">Coming Soon</p>
-                        </div>
+                            <p className="text-zinc-400 text-sm">Growth planning: Audits, Competitor Analysis, and Roadmaps.</p>
+                        </button>
                     </div>
                 </div>
             )}
 
-            {/* STEP 2: YOUTUBE SETUP */}
-            {step === 2 && selectedType === 'YouTube' && (
+            {/* STEP 2: SETUP (Dynamic based on Type) */}
+            {step === 2 && (
                 <div className="max-w-2xl mx-auto animate-in fade-in slide-in-from-right-8 duration-500">
-                    <div className="mb-8">
-                        <h1 className="text-3xl font-bold mb-2">YouTube Video Project</h1>
-                        <p className="text-zinc-400">This project will guide your video from idea to upload. You’ll review and approve work at each stage.</p>
+                    <div className="mb-6">
+                        <h1 className="text-2xl font-bold mb-1">{selectedType} Setup</h1>
+                        <p className="text-zinc-400 text-sm">Configure your request details below.</p>
                     </div>
 
-                    <div className="space-y-8">
-                        {/* A: Overview */}
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2"><Video className="h-4 w-4 text-indigo-400" /> Video Overview</h3>
-                            <div className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-zinc-400 mb-1">Working Title / Topic</label>
+                    <div className="space-y-6">
+                        {/* A: Core Details */}
+                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+                            <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500 mb-4 flex items-center gap-2">Core Details</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="md:col-span-2">
+                                    <label className="block text-xs font-semibold text-zinc-400 mb-1.5">Project Name</label>
                                     <input
-                                        className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white focus:border-indigo-500 outline-none"
-                                        placeholder="e.g. How to scale your agency"
+                                        className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm text-white focus:border-indigo-500 outline-none transition-colors"
+                                        placeholder="e.g. Q1 Growth Push"
+                                        autoFocus
                                         value={ytTitle}
                                         onChange={(e) => setYtTitle(e.target.value)}
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-zinc-400 mb-1">Video Goal</label>
-                                        <select
-                                            value={ytGoal}
-                                            onChange={(e) => setYtGoal(e.target.value)}
-                                            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white outline-none"
-                                        >
-                                            <option>Educate</option>
-                                            <option>Entertain</option>
-                                            <option>Convert</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-zinc-400 mb-1">Target Length</label>
-                                        <select
-                                            value={ytLength}
-                                            onChange={(e) => setYtLength(e.target.value)}
-                                            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white outline-none"
-                                        >
-                                            <option>Short (≤60s)</option>
-                                            <option>Mid (5–10 min)</option>
-                                            <option>Long (10–20 min)</option>
-                                        </select>
-                                    </div>
+                                <div>
+                                    <label className="block text-xs font-semibold text-zinc-400 mb-1.5">Primary Goal</label>
+                                    <select
+                                        value={ytGoal}
+                                        onChange={(e) => setYtGoal(e.target.value)}
+                                        className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm text-white outline-none focus:border-indigo-500 transition-colors"
+                                    >
+                                        <option>Educate</option>
+                                        <option>Entertain</option>
+                                        <option>Convert / Sales</option>
+                                        <option>Brand Awareness</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-semibold text-zinc-400 mb-1.5">Target Delivery</label>
+                                    <input
+                                        type="date"
+                                        className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm text-white outline-none focus:border-indigo-500 transition-colors"
+                                        onChange={(e) => setTargetDate(e.target.value)}
+                                    />
                                 </div>
                             </div>
                         </div>
 
-                        {/* B: Services included */}
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-                            <h3 className="text-lg font-semibold mb-1 flex items-center gap-2"><Target className="h-4 w-4 text-indigo-400" /> Services Included</h3>
-                            <p className="text-xs text-zinc-500 mb-4">What help do you want for this video? Only selected services are included.</p>
-                            <div className="space-y-3">
-                                {[
-                                    "Script review / improvement",
-                                    "Thumbnail concept & design",
-                                    "Video edit review",
-                                    "Title + description optimization",
-                                    "Posting checklist"
-                                ].map(service => (
-                                    <label key={service} className={`flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${ytServices.includes(service) ? 'bg-indigo-500/10 border-indigo-500/50' : 'bg-zinc-950 border-zinc-800 hover:bg-zinc-800'}`}>
-                                        <div className={`h-5 w-5 rounded border flex items-center justify-center ${ytServices.includes(service) ? 'bg-indigo-500 border-indigo-500 text-white' : 'border-zinc-700'}`}>
+                        {/* B: Scope & Services */}
+                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500 flex items-center gap-2">Scope of Work</h3>
+                                <span className="text-xs text-indigo-400 font-medium">{ytServices.length} Selected</span>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                {(selectedType === 'YouTube' ? [
+                                    "Scripting", "Thumbnail Design", "Video Editing", "SEO Optimization", "Shorts Repurposing"
+                                ] : selectedType === 'Paid Ads' ? [
+                                    "Ad Creative", "Copywriting", "Audience Targeting", "Pixel Setup", "A/B Testing"
+                                ] : selectedType === 'Social Media' ? [
+                                    "Carousel Design", "Video Editing", "Caption Writing", "Hashtag Strategy", "Scheduling"
+                                ] : [
+                                    "Channel Audit", "Competitor Analysis", "Content Calendar", "Funnel Review", "Growth Strategy"
+                                ]).map(service => (
+                                    <label key={service} className={`flex items-center gap-3 p-2.5 rounded-lg border transition-all cursor-pointer group ${ytServices.includes(service) ? 'bg-indigo-500/10 border-indigo-500/50' : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'}`}>
+                                        <div className={`h-4 w-4 rounded border flex items-center justify-center transition-colors ${ytServices.includes(service) ? 'bg-indigo-500 border-indigo-500 text-white' : 'border-zinc-600 group-hover:border-zinc-500'}`}>
                                             {ytServices.includes(service) && <Check className="h-3 w-3" />}
                                         </div>
                                         <input type="checkbox" className="hidden" checked={ytServices.includes(service)} onChange={() => handleServiceToggle(service)} />
-                                        <span className="text-sm text-zinc-200">{service}</span>
+                                        <span className={`text-sm ${ytServices.includes(service) ? 'text-white font-medium' : 'text-zinc-400 group-hover:text-zinc-300'}`}>{service}</span>
                                     </label>
                                 ))}
                             </div>
                         </div>
 
-                        {/* C: Assets */}
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-                            <h3 className="text-lg font-semibold mb-1 flex items-center gap-2"><Upload className="h-4 w-4 text-indigo-400" /> What You Provide</h3>
-                            <p className="text-xs text-zinc-500 mb-4">Check what you have ready. You can upload assets later.</p>
-                            <div className="grid grid-cols-2 gap-3">
+                        {/* C: Assets (Compact) */}
+                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+                            <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500 mb-4">Available Assets</h3>
+                            <div className="flex flex-wrap gap-2">
                                 {["Raw Footage", "Draft Script", "Brand Assets", "Inspiration Links"].map(asset => (
-                                    <label key={asset} className={`flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${ytAssets.includes(asset) ? 'bg-zinc-800 border-zinc-600' : 'bg-zinc-950 border-zinc-800'}`}>
-                                        <div className={`h-4 w-4 rounded border flex items-center justify-center ${ytAssets.includes(asset) ? 'bg-zinc-200 border-white text-black' : 'border-zinc-700'}`}>
-                                            {ytAssets.includes(asset) && <Check className="h-3 w-3" />}
-                                        </div>
-                                        <input type="checkbox" className="hidden" checked={ytAssets.includes(asset)} onChange={() => handleAssetToggle(asset)} />
-                                        <span className="text-sm text-zinc-300">{asset}</span>
-                                    </label>
+                                    <button
+                                        key={asset}
+                                        onClick={() => handleAssetToggle(asset)}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${ytAssets.includes(asset) ? 'bg-white text-black border-white' : 'bg-zinc-950 text-zinc-400 border-zinc-800 hover:border-zinc-700'}`}
+                                    >
+                                        {asset} {ytAssets.includes(asset) && "✓"}
+                                    </button>
                                 ))}
-                            </div>
-                        </div>
-
-                        {/* D: Timeline */}
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2"><Calendar className="h-4 w-4 text-indigo-400" /> Timeline & Review</h3>
-                            <div className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-zinc-400 mb-1">Target Publish Date</label>
-                                    <input type="date" className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2 text-white outline-none text-sm" onChange={(e) => setTargetDate(e.target.value)} />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-zinc-400 mb-2">Review Preference</label>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <button
-                                            onClick={() => setReviewPref('stage_by_stage')}
-                                            className={`p-4 rounded-xl border text-left transition-all ${reviewPref === 'stage_by_stage' ? 'bg-indigo-500/10 border-indigo-500 ring-1 ring-indigo-500/30' : 'bg-zinc-950 border-zinc-800'}`}
-                                        >
-                                            <div className="font-semibold text-white mb-1">Stage-by-Stage</div>
-                                            <p className="text-xs text-zinc-500">Approve scripts and drafts as they are ready. (Recommended)</p>
-                                        </button>
-                                        <button
-                                            onClick={() => setReviewPref('consolidated')}
-                                            className={`p-4 rounded-xl border text-left transition-all ${reviewPref === 'consolidated' ? 'bg-indigo-500/10 border-indigo-500 ring-1 ring-indigo-500/30' : 'bg-zinc-950 border-zinc-800'}`}
-                                        >
-                                            <div className="font-semibold text-white mb-1">Consolidated</div>
-                                            <p className="text-xs text-zinc-500">Review everything at once before final delivery.</p>
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

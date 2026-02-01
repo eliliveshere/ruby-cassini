@@ -11,6 +11,7 @@ type Step = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export default function OnboardingPage() {
     const router = useRouter();
     const setCreatorProfile = useStore((state) => state.setCreatorProfile);
+    const loadDemoData = useStore((state) => state.loadDemoData);
     const [step, setStep] = useState<Step>(0);
     const [loading, setLoading] = useState(false);
 
@@ -55,13 +56,18 @@ export default function OnboardingPage() {
         // Simulate API call
         await new Promise(r => setTimeout(r, 1500));
 
-        // Save to store
+        // 1. Load Demo Data based on Niche
+        if (formData.niche) {
+            loadDemoData(formData.niche);
+        }
+
+        // 2. Overwrite with specific user inputs (e.g. Channel Name)
         // Ensure defaults for any missing fields to avoid type errors
         const finalProfile = formData as CreatorProfile; // In real app, validate strictly
         setCreatorProfile(finalProfile);
 
         setLoading(false);
-        router.push('/dashboard/settings'); // Or dashboard home
+        router.push('/dashboard'); // Go to dashboard home
     };
 
     return (
@@ -85,7 +91,7 @@ export default function OnboardingPage() {
                         ].map((s) => (
                             <div key={s.id} className={`flex items-center gap-3 ${step === s.id ? 'text-white' : 'text-zinc-600'}`}>
                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border ${step === s.id ? 'bg-indigo-600 border-indigo-500' :
-                                        step > s.id ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-500' : 'border-zinc-800'
+                                    step > s.id ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-500' : 'border-zinc-800'
                                     }`}>
                                     {step > s.id ? <Check className="h-4 w-4" /> : s.id + 1}
                                 </div>
@@ -202,8 +208,8 @@ export default function OnboardingPage() {
                                                     updateForm('formats', newValue);
                                                 }}
                                                 className={`px-4 py-2 rounded-full border text-sm transition-all ${formData.formats?.includes(fmt)
-                                                        ? 'bg-white text-zinc-950 border-white font-semibold'
-                                                        : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:border-zinc-600'
+                                                    ? 'bg-white text-zinc-950 border-white font-semibold'
+                                                    : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:border-zinc-600'
                                                     }`}
                                             >
                                                 {fmt}

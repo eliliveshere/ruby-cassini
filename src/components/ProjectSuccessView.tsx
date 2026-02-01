@@ -60,8 +60,8 @@ export default function ProjectSuccessView() {
             </div>
 
             <div className="flex gap-4">
-                <Link href="/dashboard" className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl text-center transition-colors">
-                    View Dashboard
+                <Link href="/dashboard/pipeline" className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl text-center transition-colors">
+                    View Pipeline
                 </Link>
                 <button className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-4 rounded-xl text-center transition-colors">
                     Upload Assets
