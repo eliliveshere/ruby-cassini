@@ -171,7 +171,7 @@ export const useStore = create<AppState>((set, get) => ({
             };
         }),
 
-    demoArchetype: 'shopify',
+    demoArchetype: 'youtube',
     setDemoArchetype: (archetype) => set({ demoArchetype: archetype }),
 
     toggleWorkspaceStatus: () =>

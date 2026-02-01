@@ -10,6 +10,8 @@ import { DEMO_DATASETS } from '@/lib/demo-datasets';
 import { Eye, MonitorPlay } from 'lucide-react';
 import NextStepButton from '@/components/NextStepButton';
 import AgencyConfidenceIndicator from '@/components/AgencyConfidenceIndicator';
+import CreatorStudio from '@/components/creator/CreatorStudio';
+import KickstarterDashboard from '@/components/kickstarter/KickstarterDashboard';
 
 export default function Dashboard() {
     const projects = useStore((state) => state.projects);
@@ -35,6 +37,11 @@ export default function Dashboard() {
             router.replace('/onboarding/projects');
         }
     }, [projects, router, isDemoMode]);
+
+    // NEW: Streamlined Creator Mode
+    if (demoArchetype === 'youtube') {
+        return <CreatorStudio />;
+    }
 
     // Filter cards
     const filteredProjects = displayProjects;
@@ -67,7 +74,7 @@ export default function Dashboard() {
                             <div className="relative group">
                                 <div className="flex items-center gap-2 px-3 py-2 text-sm text-zinc-300 cursor-pointer hover:text-white transition-colors">
                                     <Eye className="h-4 w-4 text-indigo-400" />
-                                    <span>{demoArchetype === 'shopify' ? 'Shopify Brand' : demoArchetype === 'youtube' ? 'YouTube Creator' : demoArchetype === 'kickstarter' ? 'Kickstarter Launch' : 'Lead Gen'}</span>
+                                    <span>{(demoArchetype as any) === 'shopify' ? 'Shopify Brand' : (demoArchetype as any) === 'youtube' ? 'YouTube Creator' : (demoArchetype as any) === 'kickstarter' ? 'Kickstarter Launch' : 'Lead Gen'}</span>
                                 </div>
                                 {/* Dropdown implementation would usually go here or be a native select hidden on top */}
                                 <select
@@ -148,6 +155,13 @@ export default function Dashboard() {
                     </button>
                 ))}
             </div>
+
+            {/* Kickstarter Analytics Dashboard (Only for Kickstarter Archetype) */}
+            {demoArchetype === 'kickstarter' && (
+                <div className="mb-12">
+                    <KickstarterDashboard isDemoMode={isDemoMode} />
+                </div>
+            )}
 
             {/* Project Cards Grid */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
